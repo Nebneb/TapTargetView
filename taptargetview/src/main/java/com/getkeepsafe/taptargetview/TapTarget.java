@@ -49,7 +49,8 @@ public class TapTarget {
     CharSequence topTitle;
     @DrawableRes
     Integer topTitleIcon;
-
+    @DrawableRes
+    Integer titleEndDrawable;
     float outerCircleAlpha = 0.96f;
     int targetRadius = 44;
 
@@ -604,5 +605,15 @@ public class TapTarget {
         }
 
         return UiUtil.sp(context, size);
+    }
+
+    @Nullable
+    public Integer getTitleEndDrawable() {
+        return titleEndDrawable;
+    }
+
+    public TapTarget titleEndDrawable(Integer titleEndDrawable) {
+        this.titleEndDrawable = titleEndDrawable;
+        return this;
     }
 }

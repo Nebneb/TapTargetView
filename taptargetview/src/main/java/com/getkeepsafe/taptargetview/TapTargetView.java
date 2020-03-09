@@ -134,6 +134,8 @@ public class TapTargetView extends View {
     Paint chipPaint;
     @Nullable
     Drawable iconDrawable;
+    @Nullable
+    Drawable titleEndDrawable;
 
     // Drawing properties
     Rect drawingBounds;
@@ -163,6 +165,7 @@ public class TapTargetView extends View {
 
     Bitmap tintedTarget;
     Bitmap topTitleIconBitmap;
+    Bitmap titleEndIconBitmap;
 
     Listener listener;
 
@@ -466,6 +469,13 @@ public class TapTargetView extends View {
             topTitleIconBitmap = Bitmap.createBitmap(iconDrawable.getIntrinsicWidth(), iconDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
             iconDrawable.setColorFilter(new PorterDuffColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP));
             iconDrawable.setBounds(new Rect(0, 0, iconDrawable.getIntrinsicWidth(), iconDrawable.getIntrinsicHeight()));
+        }
+
+        if (target.titleEndDrawable != null) {
+            titleEndDrawable = getContext().getResources().getDrawable(target.titleEndDrawable);
+            titleEndIconBitmap = Bitmap.createBitmap(titleEndDrawable.getIntrinsicWidth(), titleEndDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+            titleEndDrawable.setColorFilter(new PorterDuffColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP));
+            titleEndDrawable.setBounds(new Rect(0, 0, iconDrawable.getIntrinsicWidth(), iconDrawable.getIntrinsicHeight()));
         }
 
         targetCirclePaint = new Paint();
@@ -789,7 +799,12 @@ public class TapTargetView extends View {
             titlePaint.setAlpha(textAlpha);
             if (titleLayout != null) {
                 titleLayout.draw(c);
+                if (titleEndIconBitmap != null) {
+                    drawTitleEndIcon(c);
+                    c.translate( - titlePaint.measureText(title.toString()) - TEXT_SPACING, 0f);
+                }
             }
+
 
             if (descriptionLayout != null && titleLayout != null) {
                 c.translate(0, titleLayout.getHeight() + TEXT_SPACING);
@@ -968,6 +983,14 @@ public class TapTargetView extends View {
         if (topTitleIcon != null && iconDrawable != null) {
             iconDrawable.setAlpha(textAlpha);
             iconDrawable.draw(canvas);
+        }
+    }
+
+    void drawTitleEndIcon(Canvas canvas) {
+        if (titleEndIconBitmap != null && titleEndDrawable != null) {
+            canvas.translate(titlePaint.measureText(title.toString()) + TEXT_SPACING, 0f);
+            titleEndDrawable.setAlpha(textAlpha);
+            titleEndDrawable.draw(canvas);
         }
     }
 
