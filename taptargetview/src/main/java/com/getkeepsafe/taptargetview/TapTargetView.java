@@ -475,7 +475,7 @@ public class TapTargetView extends View {
             titleEndDrawable = getContext().getResources().getDrawable(target.titleEndDrawable);
             titleEndIconBitmap = Bitmap.createBitmap(titleEndDrawable.getIntrinsicWidth(), titleEndDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
             titleEndDrawable.setColorFilter(new PorterDuffColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP));
-            titleEndDrawable.setBounds(new Rect(0, 0, iconDrawable.getIntrinsicWidth(), iconDrawable.getIntrinsicHeight()));
+            titleEndDrawable.setBounds(new Rect(0, 0, titleEndDrawable.getIntrinsicWidth(), titleEndDrawable.getIntrinsicHeight()));
         }
 
         targetCirclePaint = new Paint();
