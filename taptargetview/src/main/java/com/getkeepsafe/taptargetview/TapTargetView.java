@@ -754,15 +754,16 @@ public class TapTargetView extends View {
             if (topTitleLayout != null) {
 
                 int iconWidth = topTitleIconBitmap != null ? topTitleIconBitmap.getWidth() : 0;
+
+                if (chipPaint != null) {
+                    chipPaint.setAlpha(textAlpha * 50 / 255);
+                    c.drawRoundRect(chipBounds, 100f, 100f, chipPaint);
+                    c.translate(TEXT_SPACING, TEXT_SPACING);
+                }
+
                 if (topTitleIcon != null) {
 
                     topTitlePaint.setAlpha(textAlpha);
-
-                    if (chipPaint != null) {
-                        chipPaint.setAlpha(textAlpha * 50 / 255);
-                        c.drawRoundRect(chipBounds, 100f, 100f, chipPaint);
-                        c.translate(TEXT_SPACING, TEXT_SPACING);
-                    }
 
                     drawTopTitleIcon(c);
 
@@ -784,7 +785,7 @@ public class TapTargetView extends View {
                 if (topTitleIconBitmap != null)
                     c.translate(0, Math.max(topTitleLayout.getHeight(), topTitleIconBitmap.getHeight()) + TEXT_SPACING * 2);
                 else
-                    c.translate(0, topTitleLayout.getHeight() + TEXT_SPACING * 2);
+                    c.translate(-TEXT_SPACING, topTitleLayout.getHeight() + TEXT_SPACING * 2);
             titlePaint.setAlpha(textAlpha);
             if (titleLayout != null) {
                 titleLayout.draw(c);
@@ -1036,8 +1037,8 @@ public class TapTargetView extends View {
     RectF getChipBounds() {
         return new RectF(0, 0,
                 topTitlePaint.measureText(topTitle != null ? topTitle.toString() : "")
-                        + (topTitleIconBitmap != null ? topTitleIconBitmap.getWidth() : 0) + TEXT_SPACING * 4,
-                (topTitleIconBitmap != null ? topTitleIconBitmap.getHeight() : 0) + TEXT_SPACING * 2);
+                        + (topTitleIconBitmap != null ? topTitleIconBitmap.getWidth() : 0) + TEXT_SPACING * (topTitleIconBitmap != null ? 4 : 2),
+                (topTitleIconBitmap != null ? topTitleIconBitmap.getHeight() : topTitlePaint.getTextSize()) + TEXT_SPACING * 2);
     }
 
     void calculateDrawingBounds() {
