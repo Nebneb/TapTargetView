@@ -474,7 +474,6 @@ public class TapTargetView extends View {
         if (target.titleEndDrawable != null) {
             titleEndDrawable = getContext().getResources().getDrawable(target.titleEndDrawable);
             titleEndIconBitmap = Bitmap.createBitmap(titleEndDrawable.getIntrinsicWidth(), titleEndDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-            titleEndDrawable.setColorFilter(new PorterDuffColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP));
             titleEndDrawable.setBounds(new Rect(0, 0, titleEndDrawable.getIntrinsicWidth(), titleEndDrawable.getIntrinsicHeight()));
         }
 

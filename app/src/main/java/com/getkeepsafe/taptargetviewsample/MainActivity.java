@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 .drawShadow(true)
                 .topTitle("TOP TITLE", R.drawable.ic_android_black_24dp)
                 .topTitleTextSize(12)
+                .titleEndDrawable(R.drawable.ic_android_black_24dp)
                 .titleTextDimen(R.dimen.title_text_size)
                 .tintTarget(false), new TapTargetView.Listener() {
             @Override
